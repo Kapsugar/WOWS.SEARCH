@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WOWS.SEARCHER</title>
+
+</head>
+<link rel="stylesheet" href="layui/css/layui.css" media="all">
+<script src="translate/zhtw.js"></script>
+<script src="js/jquery.min.js"></script>
+
+
+<body>
+    <div style="margin-left: 20px;margin-right: 20px;">
+
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>
+                <h1>WOWS.SEARCHER</h1>
+            </legend>
+            <legend>
+                <font color="#808080">
+                    <h5>BATE 0.5B</h5>
+                </font>
+            </legend>
+        </fieldset>
+
+
+        <form class="layui-form">
+            <div class="layui-form-item">
+
+                <label class="layui-form-label">服务器</label>
+                <div class="layui-input-inline">
+                    <select id="area" name="interest" lay-filter="aihao">
+                    <option value="asia">亚服</option>
+                    <option value="ru">俄服</option>
+                    <option value="eu">欧服</option>
+                    <option value="com">美服</option>
+                </select>
+                </div>
+
+                <div class="layui-input-inline">
+                    <input type="text" id="searchNickname" name="title" lay-verify="title" autocomplete="off" placeholder="游戏ID" class="layui-input" list="searchNicknamedataList" />
+                    <datalist id="searchNicknamedataList"></datalist>
+                </div>
+
+                <input type="button" class="layui-btn layui-btn-normal" onclick="search()" value="查询" />
+                <input type="reset" class="layui-btn layui-btn-primary" value="重置" />
+
+                <label>
+                <font color="#808080">&nbsp;&nbsp;&nbsp;&nbsp;提示!
+                    请不要单纯以数据评价玩家.</font>
+            </label>
+
+
+            </div>
+
+        </form>
+
+        <div class="layui-form">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="12.5%">
+                    <col width="12.5%">
+                    <col width="12.5%">
+                    <col width="12.5%">
+                    <col width="12.5%">
+                    <col width="12.5%">
+                    <col width="12.5%">
+                    <col width="12.5%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th colspan="8">
+                            基本内容
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>最后战斗时间</td>
+                        <td id="last_battle_time"></td>
+                        <td>WGID</td>
+                        <td id="account_id"></td>
+                        <td>玩家等级</td>
+                        <td id="leveling_tier"></td>
+                        <td>账号创建时间</td>
+                        <td id="created_at"></td>
+                    </tr>
+                    <tr>
+                        <td>服务记录级别</td>
+                        <td id="leveling_points"></td>
+                        <td>数据更新时间</td>
+                        <td id="updated_at"></td>
+                        <td>登出时间</td>
+                        <td id="logout_at"></td>
+                        <td colspan="2"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="layui-table">
+                <col width="12.5%">
+                <col width="12.5%">
+                <col width="12.5%">
+                <col width="12.5%">
+                <col width="12.5%">
+                <col width="12.5%">
+                <col width="12.5%">
+                <col width="12.5%">
+                <thead>
+                    <tr>
+                        <th colspan="8">
+                            随机战斗
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>胜率</td>
+                        <td id="statistics.pvp.wins%"></td>
+                        <td>胜利场次</td>
+                        <td id="statistics.pvp.wins"></td>
+                        <td>失败场次</td>
+                        <td id="statistics.pvp.losses"></td>
+                        <td>平局场次</td>
+                        <td id="statistics.pvp.draws"></td>
+
+                    </tr>
+                    <tr>
+                        <td>场均经验(计算高级账号)</td>
+                        <td id="statistics.pvp.xp_average"></td>
+                        <td>场均伤害</td>
+                        <td id="statistics.pvp.damage_dealt_average"></td>
+                        <td>场均鱼雷命中率</td>
+                        <td id="statistics.pvp.torpedoes.shots%"></td>
+                        <td>场均主炮命中率</td>
+                        <td id="statistics.pvp.shots%"></td>
+                    </tr>
+                    <tr>
+                        <td>场均飞机击落数</td>
+                        <td id="statistics.pvp.planes_killed_average"></td>
+                        <td>场均点亮次数</td>
+                        <td id="statistics.pvp.ships_spotted_average"></td>
+                        <td>场均潜在伤害</td>
+                        <td id="statistics.pvp.art_agro%"></td>
+                        <td>场均击毁数</td>
+                        <td id="statistics.pvp.frags_average"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <table class="layui-hide" id="demo"></table>
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>鸣谢</legend>
+        </fieldset>
+        shimakazelovely
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>Author</legend>
+        </fieldset>
+        Kapsugar
+    </div>
+    <br>
+    <br>
+    <br>
+</body>
+<script src="layui/layui.all.js"></script>
+<script src="js/main.js"></script>
+<script>
+    if (str_application_id == "") {
+        layer.alert("application_id为空,请先看目录下的使用前的第一步", {
+            icon: 2
+        });
+    }
+    var m = new Date();
+    //增加时间判断,防止频繁查询毛子接口导致浏览器变卡
+    var n = new Date(m.getTime() + 200 * 60);
+    $(function() {
+        $("#searchNickname").bind('input propertychange', function() {
+            //根据毛子接口协议,小于三个字母的账号不会查询,直接报错,所以检测长度如果大于三则开始查询
+            if ((new Date() > new Date(m.getTime() + 20 * 60)) & ($("#searchNickname").val().length > 2)) {
+                autoGetAccount_id();
+                m = new Date();
+            }
+        })
+    })
+</script>
+
+</html>
