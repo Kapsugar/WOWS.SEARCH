@@ -1,29 +1,33 @@
-bate 0.1
+bate_0.1
 原始版本
 
-bate 0.2A
+bate_0.2A
 增加部分数据展示,去掉某些没用的数据
 
-bate 0.3
+bate_0.3
 
 将UI为调整为LayUI
 增加了账号为空的逻辑判断提示.
 调整结构目录
 
-bate 0.4 
+bate_0.4 
 
 优化代码结构
 增加模糊查询ID功能
 
-bate 0.4A 
+bate_0.4A 
 
 修复BUG
 
-bate 0.5A 
+bate_0.5A 
 
 增加单一战舰成绩列表展示
 优化模糊查询
 
-bate 0.5B
+bate_0.5B
 
 增加申请application_id的说明教程
+
+bate_0.5C 
+
+暂时删除了评分(现在正在思考评分的算法,有想法的同学可以私我),增加了战舰级别.

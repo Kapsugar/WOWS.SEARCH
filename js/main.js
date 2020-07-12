@@ -123,10 +123,12 @@ function search() {
         //战舰ID[回头要翻译成名称]
         var ship_id = json_warships.data[str_account_id][i].ship_id; //战舰ID
         var shipName;
+        var shiptier;
         var jValue;
         try {
             jValue = zhtw.data[ship_id];
             shipName = jValue.name;
+            shiptier = jValue.tier;
         } catch (error) {
             // if (jValue == null) {
             //     shipName = "*";
@@ -181,10 +183,13 @@ function search() {
             var xp = json_warships.data[str_account_id][i].pvp.xp; //总计经验
             var xp_average = (xp / all).toFixed(2); //场均经验
 
-            var score = 0;
+            // var demage_score = (damage_dealt_average) ^ 3;
+            // demage_score = (wins - lose - darw + 1000) * demage_score;
+            // demage_score = demage_score * (frags_average + 1);
 
             var tmp_json = {
                 "shipName": shipName,
+                "shiptier": shiptier,
                 "all": all,
                 "wins_per": wins_per,
                 "main_battery_per": main_battery_per,
@@ -197,8 +202,8 @@ function search() {
                 "planes_killed_average": planes_killed_average,
                 "dropped_capture_points_average": dropped_capture_points_average,
                 "capture_points_average": capture_points_average,
-                "xp_average": xp_average,
-                "score": score
+                "xp_average": xp_average
+                    //,"demage_score": demage_score
 
             };
             json_showWarship.push(tmp_json);
@@ -213,6 +218,7 @@ function search() {
         cols: [
             [
                 { field: 'shipName', title: '战舰', sort: true },
+                { field: 'shiptier', title: '等级', width: 80, sort: true },
                 { field: 'all', title: '场次', width: 80, sort: true },
                 { field: 'wins_per', title: '胜率', width: 80, sort: true },
                 { field: 'main_battery_per', title: '主炮命中', width: 95, sort: true },
@@ -226,7 +232,7 @@ function search() {
                 { field: 'dropped_capture_points_average', title: '防御系数', sort: true },
                 { field: 'capture_points_average', title: '占领系数', sort: true },
                 { field: 'xp_average', title: '场均经验', sort: true },
-                { field: 'score', title: '评分', sort: true }
+                // { field: 'demage_score', title: '场均评分', sort: true }
 
             ]
         ],
